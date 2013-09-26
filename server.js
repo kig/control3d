@@ -4,6 +4,8 @@ var app = require('http').createServer(handler)
 
 io.debug = false;
 io.set('log level', 1);
+io.set("transports", ["xhr-polling"]);
+io.set("polling duration", 10); 
 
 app.listen(8800);
 
