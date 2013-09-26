@@ -1,0 +1,52 @@
+<!doctype html5>
+<html>
+<head>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  #help {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    width: 300px;
+    font-size: 14px;
+  }
+  #help p {
+    margin: 0;
+  }
+  .selected img {
+    border: 2px solid #ff8888;
+    margin-left: -2px;
+    margin-top: -2px;
+  }
+  .grabbed img {
+    border: 2px solid #88ff88;
+    margin-left: -2px;
+    margin-top: -2px;
+  }
+  .grabbed .selected img {
+    border: 2px solid #ffff88;
+    margin-left: -2px;
+    margin-top: -2px;
+  }
+</style>
+</head>
+<body>
+
+<pre id="logPre"></pre>
+<pre id="logPre2"></pre>
+
+
+
+<script src="//js.leapmotion.com/0.2.1/leap.js"></script>
+<script src="http://www.poemyou.com/js/matrix.js"></script>
+<script src="http://v.fhtr.net/js/E.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/script.js"></script>
+
+</body></html>
