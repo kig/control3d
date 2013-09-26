@@ -7,7 +7,7 @@ io.set('log level', 1);
 io.set("transports", ["xhr-polling"]);
 io.set("polling duration", 10); 
 
-app.listen(8800);
+app.listen(process.env.PORT || 5000);
 
 function handler (req, res) {
 	var path = '/index.html';
