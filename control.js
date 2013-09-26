@@ -39,6 +39,9 @@ window.addEventListener('devicemotion', function(ev) {
 	px = 0.95*(px+vx*t);
 	py = 0.95*(py+vy*t);
 	pz = 0.95*(pz+vz*t);
+	if (!selected) {
+		return;
+	}
 	socket.emit('input', {
 		type: 'motion',
 		velocity: {x: vx, y: vy, z: vz},
@@ -51,6 +54,9 @@ window.addEventListener('devicemotion', function(ev) {
 }, false);
 
 window.addEventListener('deviceorientation', function(ev) {
+	if (!selected) {
+		return;
+	}
 	socket.emit('input', {
 		type: 'orientation',
 		alpha: ev.alpha,
@@ -69,6 +75,8 @@ window.addEventListener('scroll', function(e) {
 
 var inGesture = false;
 
+var selected = false;
+
 window.addEventListener('touchend', function(e) {
 	e.preventDefault();
 	if (e.touches.length === 0) {
@@ -76,7 +84,8 @@ window.addEventListener('touchend', function(e) {
 			inGesture = false;
 		} else {
 			if (connected) {
-				socket.emit('input', {type: 'select'});
+				selected = !selected;
+				socket.emit('input', {type: 'select', value: selected});
 			} else {
 				socket.socket.connect();
 			}
@@ -92,11 +101,17 @@ window.addEventListener('gestureend', function(e) {
 	e.preventDefault();
 	scale *= e.scale;
 	rotation += e.rotation;
+	if (!selected) {
+		return;
+	}
 	socket.emit('input', {type: 'gesture', scale: scale, rotation: rotation});
 }, false);
 
 window.addEventListener('gesturechange', function(e) {
 	e.preventDefault();
+	if (!selected) {
+		return;
+	}
 	socket.emit('input', {type: 'gesture', scale: scale*e.scale, rotation: rotation+e.rotation});
 }, false);
 

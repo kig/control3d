@@ -317,7 +317,7 @@ socket.on('input', function (data) {
 	var tra = rotationTarget;
 
 	if (data.type === 'select') {
-		selected = !selected;
+		selected = data.value;
 		//rot.className = selected ? 'selected' : '';
 		if (!selected) {
 			//oX = rotX;
